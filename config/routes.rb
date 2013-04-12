@@ -1,9 +1,15 @@
 BulletinApp::Application.routes.draw do
 
-  get "users/new"
+  devise_for :users
+
 
   root :to => 'static_pages#home'
-  match '/signup', to: 'users#new'
+
+#  devise_scope :user do
+#      get "sign_in", :to => "devise/sessions#new"
+#      get "/users/sign_up", to: "devise/registrations#new"
+#  end
+  # match '/signup', to: 'users#new'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
