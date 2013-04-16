@@ -1,9 +1,12 @@
 BulletinApp::Application.routes.draw do
 
-  devise_for :users
+  devise_for :users, path_names: {sign_in: "login", sign_out: "logout"},
+             controllers: {omniauth_callbacks: "omniauth_callbacks"}
 
+  resources :users
 
   root :to => 'static_pages#home'
+ # match '/auth/:provider/callback', to: 'sessions#create'
 
 #  devise_scope :user do
 #      get "sign_in", :to => "devise/sessions#new"

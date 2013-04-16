@@ -1,18 +1,31 @@
 <h2>Sign up</h2>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
+ <p><%= f.label :username %><br />
+  <%= f.text_field :username %></p>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+  <p><%= f.label :full_name%><br />
+  <%= f.text_field :full_name%></p>
 
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
+  <%= f.input  :email, label: 'Your email here' %>
+  <%= f.input  :birthday, label: 'Your birthday here' %>
+  <%= f.input  :address, label: 'Your address here' %>
+  <%= f.input  :city, label: 'Your city here' %>
+  <%= f.input  :state, label: 'Your state here' %>
+  <%= f.input  :country, label: 'Your country here' %>
+  <%= f.input  :zip, label: 'Zip' %>
+
+  <% if f.object.password_required? %>
+    <div><%= f.label :password %><br />
+    <%= f.password_field :password %></div>
+
+    <div><%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %></div>
+  <% end %>
 
   <div><%= f.submit "Sign up" %></div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<%= render "links" %>

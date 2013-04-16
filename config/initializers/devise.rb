@@ -7,7 +7,7 @@ Devise.setup do |config|
   config.mailer_sender = "please-change-me-at-config-initializers-devise@example.com"
 
   # Configure the class responsible to send e-mails.
-  # config.mailer = "Devise::Mailer"
+   config.mailer = "Devise::Mailer"
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
@@ -23,7 +23,7 @@ Devise.setup do |config|
   # session. If you need permissions, you should implement that in a before filter.
   # You can also supply a hash where the value is a boolean determining whether
   # or not authentication should be aborted when the value is not present.
-  # config.authentication_keys = [ :email ]
+   config.authentication_keys = [ :login ]
 
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
@@ -122,7 +122,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :validatable
   # Range for password length. Default is 8..128.
-  config.password_length = 8..128
+  config.password_length = 4..128
 
   # Email regex used to validate email formats. It simply asserts that
   # an one (and only one) @ exists in the given string. This is mainly
@@ -144,7 +144,7 @@ Devise.setup do |config|
   # config.lock_strategy = :failed_attempts
 
   # Defines which key will be used when locking and unlocking an account
-  # config.unlock_keys = [ :email ]
+   config.unlock_keys = [ :email ]
 
   # Defines which strategy will be used to unlock an account.
   # :email = Sends an unlock link to the user email
@@ -163,7 +163,7 @@ Devise.setup do |config|
   # ==> Configuration for :recoverable
   #
   # Defines which key will be used when recovering the password for an account
-  # config.reset_password_keys = [ :email ]
+   config.reset_password_keys = [ :email ]
 
   # Time interval you can reset your password with a reset password key.
   # Don't put a too small interval or your users won't have the time to
@@ -214,7 +214,11 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
-
+  #config.omniauth :twitter, ENV["TWITTER_CONSUMER_KEY"], ENV["TWITTER_CONSUMER_SECRET"]
+  config.omniauth :twitter, 'g6rm2GJITBP1rL9lG7pZg', 'fLb2MNwhW5r8ukDSCX8jZ3fdSd5pnwaYbIK8fdL1fzs'
+  config.omniauth :facebook, '505074042882746', '23efb8a5d8c47f72e52d74b9196de9db'
+  #config.omniauth :google_oauth2, '844537373635.apps.googleusercontent.com', 'PAgLZowKpCsC63azEz9lEUon', { access_type: "offline", approval_prompt: "" }
+  config.omniauth :google_apps, domain: 'gmail.com'
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
