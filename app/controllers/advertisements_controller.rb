@@ -5,8 +5,9 @@ class AdvertisementsController < ApplicationController
     #    file.write(uploaded_io.read)
     #end
     @advertisement = current_user.advertisements.build(params[:advertisement])
+    #@advertisement.content=RedCloth.new(@advertisement.content).to_html
     if @advertisement.save
-      flash[:success] = "Advert created!"
+      flash.notice = "Advert created!"
       redirect_to root_url
     else
       render "static_pages/home"
@@ -15,16 +16,33 @@ class AdvertisementsController < ApplicationController
   end
 
   def edit
+    @advertisement = Advertisement.find(params[:id])
   end
+
+  def update
+    @advertisement = Advertisement.find(params[:id])
+    if @advertisement.update_attributes(params[:advertisement])
+      flash.notice= "Advert updated!"
+      redirect_to root_url
+    else
+      render "edit"
+    end
+  end
+
 
   def index
    @advertisement_items = Advertisement.order('created_at DESC').paginate(page: params[:page], :per_page => 10)
-   send_file "#{Rails.root}/imagenes_expedientes/#{@volunteer.avatar_url}",:disposition => 'inline', :type=>"application/jpg", :x_sendfile=>true
   end
 
   def show
   end
 
   def destroy
+    @advertisement = Advertisement.find(params[:id])
+    @advertisement.destroy
+    flash.notice = "Successfully destroyed advert."
+    #redirect_to :controller => "user", :action => "show"
+    #redirect_to :controller => "user", :action => "show", :id => @advertisement.user.id
+    redirect_to @advertisement.user
   end
 end

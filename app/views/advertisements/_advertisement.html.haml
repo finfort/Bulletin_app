@@ -1,6 +1,12 @@
 %li
   -#=image_tag advertisement.img
   =image_tag advertisement.img_url.to_s
-  %span.content #{advertisement.content}
+  = link_to advertisement.img.url.to_s, advertisement.img.url.to_s
+  = image_tag(advertisement.img_url) if advertisement.img_url
+
+  %span.content #{simple_format(RedCloth.new(html_escape(advertisement.content)).to_html)}
   %span.timestamp Posted by #{advertisement.user.username} #{time_ago_in_words(advertisement.created_at)} ago.
+  = link_to 'Edit', edit_advertisement_path(advertisement)
+  = link_to 'Destroy', advertisement, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
 

@@ -1,6 +1,6 @@
 %li{:id => advs_item.id}
   =image_tag advs_item.img_url.to_s
-  %span.content= advs_item.content
+  %span.content #{simple_format(RedCloth.new(html_escape(advs_item.content)).to_html)}
   %span.timestamp
     Posted #{time_ago_in_words(advs_item.created_at)} ago by
   = link_to advs_item.user.username, advs_item.user

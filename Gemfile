@@ -18,6 +18,7 @@ gem 'will_paginate-bootstrap'
 gem 'faker'
 gem 'will_paginate', '~> 3.0'
 gem 'carrierwave'
+gem 'RedCloth'
 
 
 group :development, :test do

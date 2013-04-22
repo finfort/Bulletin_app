@@ -2,6 +2,10 @@
   = f.error_notification
 
   .form-inputs
+    = f.label "Edit content"
+    = f.text_area :content, :rows => 5
+    = f.label "Edit image"
+    = f.file_field :img
 
   .form-actions
     = f.button :submit

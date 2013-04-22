@@ -5,10 +5,12 @@
 %br Email:#{@user.email}
 %br Address is #{@user.addressFull}
 = image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@user.latitude}%2C#{@user.longitude}"
-%div
-  = if @user.advertisements.any?
-    %h3 Advertisements #{@user.advertisements.count}
-    %ol.advertisements
+%div.advert
+  - if @user.advertisements.any?
+    %h3
+      = link_to 'Advertisements', "#",:name => "adverts"
+      #{@user.advertisements.count}
+    %ul.advertisements
       =render @advertisements
     = will_paginate @advertisements, :renderer => BootstrapPagination::Rails
 
