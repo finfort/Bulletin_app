@@ -1,2 +1,16 @@
-%h1 StaticPages#home
-%p Find me in app/views/static_pages/home.html.haml
+-#= @user_signed_in.inspect
+- if user_signed_in?
+  .row
+    %aside.span4
+      %section
+        = render 'shared/user_info'
+      %section
+        -#- if @advertisement.any?
+        = render 'shared/advertisement_form'
+        -#= @advertisement.inspect
+- else
+  - if @advertisement_items.any?
+    %ol.advertisements
+      -#= render 'shared/advs_item'
+      = render :partial => "shared/advs_item", :collection => @advertisement_items
+      -#= will_paginate @advertisement_items, :renderer => BootstrapPagination::Rails

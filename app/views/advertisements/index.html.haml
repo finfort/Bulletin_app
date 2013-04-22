@@ -1,0 +1,22 @@
+%h1 Advertisements
+= render :partial => "shared/advs_item", :collection => @advertisement_items
+-#= render @advertisement_items
+= will_paginate @advertisement_items, :renderer => BootstrapPagination::Rails
+
+-#%h1 Listing advertisements
+-#
+-#%table
+-#  %tr
+-#    %th
+-#    %th
+-#    %th
+-#
+-#  - @advertisements.each do |advertisement|
+-#    %tr
+-#      %td= link_to 'Show', advertisement
+-#      %td= link_to 'Edit', edit_advertisement_path(advertisement)
+-#      %td= link_to 'Destroy', advertisement, :method => :delete, :data => { :confirm => 'Are you sure?' }
+-#
+-#%br
+-#
+-#= link_to 'New Advertisement', new_advertisement_path

@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :authentications
+  has_many :advertisements, dependent: :destroy
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -19,6 +20,7 @@ class User < ActiveRecord::Base
   attr_accessible :latitude, :longitude
   geocoded_by :addressFull, :if => :address_changed?
   after_validation :geocode
+  attr_accessible :addressFull
   def addressFull
     [address, city, state, country].join(' ')
   end

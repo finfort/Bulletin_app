@@ -1,3 +1,15 @@
 =provide(:title, @user.username)
-%h3=@user.email
+%br User name:#{@user.username}
+%br Full name: #{@user.full_name}
+%br Birthday at: #{@user.birthday}
+%br Email:#{@user.email}
+%br Address is #{@user.addressFull}
 = image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@user.latitude}%2C#{@user.longitude}"
+%div
+  = if @user.advertisements.any?
+    %h3 Advertisements #{@user.advertisements.count}
+    %ol.advertisements
+      =render @advertisements
+    = will_paginate @advertisements, :renderer => BootstrapPagination::Rails
+
+

@@ -14,9 +14,15 @@ gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-google-apps'
+gem 'will_paginate-bootstrap'
+gem 'faker'
+gem 'will_paginate', '~> 3.0'
+gem 'carrierwave'
+
 
 group :development, :test do
 gem 'sqlite3'
+gem 'pry'
 gem 'rspec-rails'
 end
 
@@ -28,6 +34,7 @@ end
 gem 'jquery-rails'
 
 group :test do
+  gem 'factory_girl_rails'
   gem 'capybara', '1.1.2'
 end
 
