@@ -9,4 +9,8 @@ class Advertisement < ActiveRecord::Base
   default_scope order: 'advertisements.created_at DESC'
 
   mount_uploader :img, ImgUploader
+
+  acts_as_commentable
+
+  has_many :comments, as: :commentable
 end

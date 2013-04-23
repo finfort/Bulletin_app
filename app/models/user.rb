@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_many :authentications
   has_many :advertisements, dependent: :destroy
+
+  has_many :comments, as: :commentable
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable

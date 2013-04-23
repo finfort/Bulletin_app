@@ -19,6 +19,9 @@ gem 'faker'
 gem 'will_paginate', '~> 3.0'
 gem 'carrierwave'
 gem 'RedCloth'
+gem 'acts_as_commentable_with_threading'
+gem 'rmagick'
+
 
 
 group :development, :test do

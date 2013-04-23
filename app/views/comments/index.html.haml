@@ -1,0 +1,8 @@
+%h1 Comments
+
+#id comments
+-@comments.each do |comment|
+  .comment
+    =simple_format comment.body
+    =simple_format comment.title
+    =simple_format comment.subject

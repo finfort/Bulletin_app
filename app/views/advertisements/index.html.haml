@@ -1,5 +1,5 @@
 %h1 Advertisements
-= render :partial => "shared/advs_item", :collection => @advertisement_items
+= render :partial => "shared/advertisement", :collection => @advertisement_items
 -#= render @advertisement_items
 = will_paginate @advertisement_items, :renderer => BootstrapPagination::Rails
 

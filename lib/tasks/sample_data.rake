@@ -41,13 +41,13 @@ def make_users
 end
 
 def make_advertisements
-  users = User.all(limit: 6)
+  users = User.all(limit: 3)
   #adv_img = Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample
   30.times do
     #adv_img = Dir.glob(Rails.root.join("app", "assets", "images", "*")).sample
     #adv_img = Dir.glob(File.join("assets/images", "*")).sample
    users.each { |user|
-      adv_img = File.basename(Dir.glob("app/assets/images/*").sample)
+      adv_img =""# File.basename(Dir.glob("public/public/*").sample)
       content = Faker::Lorem.sentence(10)
       user.advertisements.create!(content: content, img: adv_img)
     }

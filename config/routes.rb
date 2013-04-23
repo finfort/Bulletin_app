@@ -7,7 +7,9 @@ BulletinApp::Application.routes.draw do
 
   resources :users
   #resources :advertisements#, only: [:create, :edit, :destroy, :show]
-  resources :advertisements
+  resources :advertisements do
+    resources :comments
+  end
 
   root :to => 'static_pages#home'
  # match '/auth/:provider/callback', to: 'sessions#create'
