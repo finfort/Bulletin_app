@@ -8,6 +8,9 @@ namespace :db do
 end
 
 def make_users
+  Role.user
+  Role.admin
+  Role.moderator
   admin = User.create!(username:     "test",
                        full_name: "EXAMPLEovich",
                        email:    "example@example.org",
@@ -18,7 +21,8 @@ def make_users
                        city: "Donetsk",
                        state: "Donetsk",
                        country: "Ukraine",
-                       zip: "83000")
+                       zip: "83000",
+                       role_id: Role.admin.id)
 
   #admin.toggle!(:admin)
   29.times do |n|

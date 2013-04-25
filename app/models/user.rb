@@ -1,8 +1,11 @@
 class User < ActiveRecord::Base
   has_many :authentications
   has_many :advertisements, dependent: :destroy
+  #has_and_belongs_to_many :roles
+  belongs_to :role
 
-  has_many :comments, as: :commentable
+  attr_accessible :roles
+  has_many :comments#, as: :commentable
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -10,7 +13,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :username, :email, :password, :password_confirmation, :remember_me
+  attr_accessible :username, :email, :password, :password_confirmation, :remember_me, :role_id
   #  attr_accessible :title, :body
   attr_accessible :full_name, :birthday, :address, :city, :state, :country, :zip
   validates :full_name, :birthday, :address, :city, :state, :country, :zip, :presence => true
@@ -27,6 +30,26 @@ class User < ActiveRecord::Base
     [address, city, state, country].join(' ')
   end
 
+  ###############
+  #CanCan code
+  ###############
+  def is_admin?
+    return self.role.name.eql? Role.admin.name unless self.role.nil?
+    false
+  end
+  def is_user?
+    return self.role.name.eql? Role.user.name unless self.role.nil?
+    false
+  end
+
+  def is_moderator?
+    return self.role.name.eql? Role.moderator.name unless self.role.nil?
+    false
+  end
+
+  ###########
+  #end CanCan
+  ##########
    def self.find_first_by_auth_conditions(warden_conditions)
       conditions = warden_conditions.dup
       if login = conditions.delete(:login)

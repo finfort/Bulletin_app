@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130422154949) do
+ActiveRecord::Schema.define(:version => 20130425144144) do
 
   create_table "advertisements", :force => true do |t|
     t.string   "content"
@@ -26,21 +26,24 @@ ActiveRecord::Schema.define(:version => 20130422154949) do
   end
 
   create_table "comments", :force => true do |t|
-    t.integer  "commentable_id",   :default => 0
-    t.string   "commentable_type", :default => ""
-    t.string   "title",            :default => ""
-    t.text     "body",             :default => ""
-    t.string   "subject",          :default => ""
-    t.integer  "user_id",          :default => 0,  :null => false
-    t.integer  "parent_id"
-    t.integer  "lft"
-    t.integer  "rgt"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.integer  "advertisement_id"
+    t.string   "author_name"
+    t.string   "site_url"
+    t.text     "content"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
-  add_index "comments", ["commentable_id", "commentable_type"], :name => "index_comments_on_commentable_id_and_commentable_type"
-  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "roles_users", :id => false, :force => true do |t|
+    t.integer "role_id"
+    t.integer "user_id"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",           :null => false
@@ -68,6 +71,7 @@ ActiveRecord::Schema.define(:version => 20130422154949) do
     t.string   "uid"
     t.string   "string"
     t.date     "birthday",               :default => '2013-04-17'
+    t.integer  "role_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

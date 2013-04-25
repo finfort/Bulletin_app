@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!, except: [:index]
+  #before_filter :authenticate_user!, except: [:index]
+  load_and_authorize_resource
+
+  before_filter :load_roles, :only => [:new, :edit, :update, :create]
+
   def new
 
   end
@@ -19,4 +23,11 @@ class UsersController < ApplicationController
   end
 
 
+  private
+  def load_roles
+    @roles = Role.all
+  end
+  def find_resource
+    @user ||= User.find params[:id]
+  end
 end

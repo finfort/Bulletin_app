@@ -4,6 +4,8 @@ BulletinApp::Application.routes.draw do
 
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"},
              controllers: {omniauth_callbacks: "omniauth_callbacks"}
+  # replace devise_for :users with:
+#  devise_for :users,  :controllers => { :registrations => "users/registrations" }
 
   resources :users
   #resources :advertisements#, only: [:create, :edit, :destroy, :show]

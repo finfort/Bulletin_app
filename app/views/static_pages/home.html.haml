@@ -11,6 +11,5 @@
 - else
   - if @advertisement_items.any?
     %ol.advertisements
-      -#= render 'shared/advs_item'
       = render :partial => "shared/advertisement", :collection => @advertisement_items
       -#= will_paginate @advertisement_items, :renderer => BootstrapPagination::Rails

@@ -1,11 +1,16 @@
 class AdvertisementsController < ApplicationController
-  before_filter :authenticate_user!
+  #before_filter :authenticate_user!
+  #########
+  #CanCan
+  #########
+  load_and_authorize_resource
+  #comments_controller
+  #load_and_authorize_resource nested: :advertisement
+  ########
+  #end CanCan
+  ########
   def create
-    #File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'w') do |file|
-    #    file.write(uploaded_io.read)
-    #end
     @advertisement = current_user.advertisements.build(params[:advertisement])
-    #@advertisement.content=RedCloth.new(@advertisement.content).to_html
     if @advertisement.save
       flash.notice = "Advert created!"
       redirect_to root_url
@@ -32,13 +37,14 @@ class AdvertisementsController < ApplicationController
 
   def index
    @advertisement_items = Advertisement.order('created_at DESC').paginate(page: params[:page], :per_page => 10)
-   @user_who_commented = @current_user
-   @comment = Comment.build_from( Advertisement.last, User.first, "Hey this is my comment!" )
+   #@user_who_commented = @current_user
+   #@comment = Comment.build_from( Advertisement.last, User.first, "Hey this is my comment!" )
   end
 
   def show
     @advertisement = Advertisement.find(params[:id])
-
+    @comment= Comment.new(:advertisement => @advertisement)
+    #@comment= @advertisement.comments
   end
 
   def destroy

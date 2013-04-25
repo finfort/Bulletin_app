@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
 gem 'devise', '2.0'
+gem 'cancan'
 gem 'sass-rails', '~> 3.2'
 gem 'bootstrap-sass', '~> 2.3.1.0'
 gem 'simple_form'
@@ -19,8 +20,8 @@ gem 'faker'
 gem 'will_paginate', '~> 3.0'
 gem 'carrierwave'
 gem 'RedCloth'
-gem 'acts_as_commentable_with_threading'
 gem 'rmagick'
+gem 'jquery-rails'
 
 
 
@@ -34,8 +35,6 @@ group :assets do
   gem 'coffee-rails', '3.2.2'
   gem 'uglifier', '1.2.3'
 end
-
-gem 'jquery-rails'
 
 group :test do
   gem 'factory_girl_rails'

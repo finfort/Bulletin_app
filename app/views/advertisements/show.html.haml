@@ -3,6 +3,22 @@
   %span.content #{simple_format(RedCloth.new(html_escape(@advertisement.content)).to_html)}
   %span.timestamp Posted by #{@advertisement.user.username} #{time_ago_in_words(@advertisement.created_at)} ago.
   = link_to 'Edit', edit_advertisement_path(@advertisement)
+  \|
   = link_to 'Destroy', @advertisement, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-
+= link_to "Back to advertisements", @advertisement.user
+- unless @advertisement.comments.empty?
+  %h2= pluralize(@advertisement.comments.size, 'comment')
+  #comments
+    - for comment in @advertisement.comments
+      .comment
+        %strong= link_to_unless comment.site_url.blank?, h(comment.author_name), h(comment.site_url)
+        %em
+          on #{comment.created_at.strftime('%b %d, %Y at %H:%M')}
+        = simple_format comment.content
+        %p
+          - if can? :update, comment
+            = link_to "Edit", edit_advertisement_comment_path(comment)
+          - if can? :destroy, comment
+            | #{link_to "Destroy", [comment.advertisement, comment], :method => :delete, :confirm => "Are you sure?"}
+%h3 Add your comment:
+= render :partial => 'comments/form'

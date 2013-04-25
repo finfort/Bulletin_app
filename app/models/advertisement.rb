@@ -10,7 +10,6 @@ class Advertisement < ActiveRecord::Base
 
   mount_uploader :img, ImgUploader
 
-  acts_as_commentable
 
-  has_many :comments, as: :commentable
+  has_many :comments, dependent: :destroy
 end

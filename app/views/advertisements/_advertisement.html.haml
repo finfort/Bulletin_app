@@ -6,7 +6,9 @@
     = image_tag(advertisement.img_url(:thumb)) if advertisement.img_url
   %span.content #{simple_format(RedCloth.new(html_escape(advertisement.content)).to_html)}
   %span.timestamp Posted by #{advertisement.user.username} #{time_ago_in_words(advertisement.created_at)} ago.
-  = link_to 'Edit', edit_advertisement_path(advertisement)
-  = link_to 'Destroy', advertisement, :method => :delete, :data => { :confirm => 'Are you sure?' }
+  - if can? :update, advertisement
+    = link_to 'Edit', edit_advertisement_path(advertisement)
+  - if can? :destroy, advertisement
+    = link_to 'Destroy', advertisement, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 
