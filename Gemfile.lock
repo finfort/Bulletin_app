@@ -235,7 +235,7 @@ DEPENDENCIES
   cancan
   capybara (= 1.1.2)
   carrierwave
-  coffee-rails (= 3.2.2)
+  coffee-rails
   country_select
   devise (= 2.0)
   factory_girl_rails
@@ -257,6 +257,6 @@ DEPENDENCIES
   sendgrid
   simple_form
   sqlite3
-  uglifier (= 1.2.3)
+  uglifier
   will_paginate (~> 3.0)
   will_paginate-bootstrap

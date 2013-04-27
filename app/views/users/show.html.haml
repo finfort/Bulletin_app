@@ -5,6 +5,17 @@
 %br Email:#{@user.email}
 %br Address is #{@user.addressFull}
 = image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@user.latitude}%2C#{@user.longitude}"
+=if can? :manage_roles, @user
+  = simple_form_for(@user) do |f|
+    -#=fields_for @user.role do |role_field|
+      -#=role_field.check_box "admin"
+      -#=role_field.check_box (:name=="admin"? true)
+      -#=role_field.check_box "moderator"
+      %label
+        =role_field.check_box 'role_field.id', #{!role_field.id.nil?}
+      -#=check_box_tag 'role_field.id', #{!role_field.id.nil?}
+    =f.association :role,   as: :check_boxes
+    =f.button :submit
 %div.advert
   - if @user.advertisements.any?
     %h3

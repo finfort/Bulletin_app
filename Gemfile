@@ -22,7 +22,8 @@ gem 'carrierwave'
 gem 'RedCloth'
 gem 'rmagick'
 gem 'jquery-rails'
-
+gem 'coffee-rails'
+gem 'uglifier'
 
 
 group :development, :test do
@@ -32,8 +33,7 @@ gem 'rspec-rails'
 end
 
 group :assets do
-  gem 'coffee-rails', '3.2.2'
-  gem 'uglifier', '1.2.3'
+ # gem 'coffee-rails', '3.2.2'
 end
 
 group :test do

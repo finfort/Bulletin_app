@@ -6,17 +6,17 @@ class Ability
 
 
     if user.is_admin?
+      can :manage, Role
       can :manage, :all
-    elsif
-      can :read, :all
-      can :create, Comment
-      can :update, Comment do |comment|
-        comment.try(:user) == user || user.is_moderator?
-      end
+    elsif user.is_moderator?
+      can :manage, Advertisement
+      can :manage, Comment
     elsif user.is_user?
-        can :create, :Advertisement
-        can :update, :Advertisement do |advertisement|
+        can :manage, Advertisement do |advertisement|
           advertisement.try(:user) == user
+        end
+        can :manage, Comment do |comment|
+          comment.try(:user) == user
         end
     end
     # Define abilities for the passed in user here. For example:

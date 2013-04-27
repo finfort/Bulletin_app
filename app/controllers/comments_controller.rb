@@ -1,27 +1,53 @@
 class CommentsController < ApplicationController
   load_and_authorize_resource
+###################
+ # $('<%= escape_javascript(render(:partial => @comment))$>')
+ # .appendTo('#comments')
+ # .hide()
+ # .fadeIn()
 
+ # $('#new_comment')[0].reset()
+
+ # $('#comments_count').html '<%= comments_count %>'
   def new
   end
 
+  def index
+
+  end
+
   def create
+    @advertisement= Advertisement.find(params[:advertisement_id])
+    @comment = @advertisement.comments.new(params[:comment])
     @comment.user = current_user
-    if @comment.save
-      flash[:notice] = "Successfully created comment."
-      redirect_to advertisement_url(@comment.advertisement)
-    else
-      render :action => 'new'
+      if @comment.save
+        flash[:notice] = "Successfully created comment."
+        respond_to do |format|
+          format.html {
+          redirect_to advertisement_url(@comment.advertisement)}
+          format.js
+        end
+       else
+        render :action => 'new'
     end
   end
 
+  def show
+    @advertisement= Advertisement.find(params[:advertisement_id])
+    @comment = Comment.find(params[:id])
+  end
+
   def edit
-    @comment = Comment.find(params[:comment])
+    @advertisement= Advertisement.find(params[:advertisement_id])
+    @comment = Comment.find(params[:id])
   end
 
   def update
+    @comment = Comment.find(params[:id])
     if @comment.update_attributes(params[:comment])
       flash[:notice] = "Successfully updated comment."
       redirect_to advertisement_url(@comment.advertisement)
+      #redirect_to advertisement_url(@comment.advertisement, @comment)
     else
       render :action => 'edit'
     end
@@ -29,7 +55,11 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment.destroy
-    flash[:notice] = "Successfully destroyed comment."
-    redirect_to advertisement_url(@comment.advertisement)
+    respond_to do |format|
+      format.html {
+      flash[:notice] = "Successfully destroyed comment."
+      redirect_to advertisement_url(@comment.advertisement)}
+      format.js
+    end
   end
 end
