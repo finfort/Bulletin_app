@@ -1,5 +1,6 @@
 class Comment < ActiveRecord::Base
 
+  resourcify
   attr_accessible :advertisement_id, :author_name,:site_url,:content
   attr_accessible :advertisement
   belongs_to :advertisement

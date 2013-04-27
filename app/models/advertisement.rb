@@ -10,6 +10,7 @@ class Advertisement < ActiveRecord::Base
 
   mount_uploader :img, ImgUploader
 
-
   has_many :comments, dependent: :destroy
+
+  resourcify
 end

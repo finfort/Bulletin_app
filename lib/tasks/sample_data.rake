@@ -8,9 +8,9 @@ namespace :db do
 end
 
 def make_users
-  Role.user
-  Role.admin
-  Role.moderator
+  #Role.user
+  #Role.admin
+  #Role.moderator
   admin = User.create!(username:     "test",
                        full_name: "EXAMPLEovich",
                        email:    "example@example.org",
@@ -21,9 +21,9 @@ def make_users
                        city: "Donetsk",
                        state: "Donetsk",
                        country: "Ukraine",
-                       zip: "83000",
-                       role_id: Role.admin.id)
+                       zip: "83000")
 
+  admin.add_role("admin")
   #admin.toggle!(:admin)
   29.times do |n|
     name  = Faker::Name.name
@@ -52,7 +52,7 @@ def make_advertisements
     #adv_img = Dir.glob(File.join("assets/images", "*")).sample
    users.each { |user|
       adv_img =""# File.basename(Dir.glob("public/public/*").sample)
-      content = Faker::Lorem.sentence(10)
+      content = Faker::Lorem.sentence(27)
       user.advertisements.create!(content: content, img: adv_img)
     }
   end

@@ -1,8 +1,12 @@
 class User < ActiveRecord::Base
+  rolify
   has_many :authentications
   has_many :advertisements, dependent: :destroy
   #has_and_belongs_to_many :roles
+
+  attr_accessible :role_ids
   belongs_to :role
+  after_create :assign_user_role
 
   attr_accessible :roles
   has_many :comments#, as: :commentable
@@ -33,19 +37,6 @@ class User < ActiveRecord::Base
   ###############
   #CanCan code
   ###############
-  def is_admin?
-    return self.role.name.eql? Role.admin.name unless self.role.nil?
-    false
-  end
-  def is_user?
-    return self.role.name.eql? Role.user.name unless self.role.nil?
-    false
-  end
-
-  def is_moderator?
-    return self.role.name.eql? Role.moderator.name unless self.role.nil?
-    false
-  end
 
   ###########
   #end CanCan
@@ -88,6 +79,10 @@ class User < ActiveRecord::Base
     else
       super
     end
+  end
+  private
+  def assign_user_role
+    self.add_role "user"
   end
 
 ### This is the correct method you override with the code above

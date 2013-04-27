@@ -5,13 +5,13 @@ class Ability
     user ||= User.new # guest user
 
 
-    if user.is_admin?
+    if user.has_role? :admin
       can :manage, Role
       can :manage, :all
-    elsif user.is_moderator?
+    elsif user.has_role? :moderator
       can :manage, Advertisement
       can :manage, Comment
-    elsif user.is_user?
+    elsif user.has_role? :user
         can :manage, Advertisement do |advertisement|
           advertisement.try(:user) == user
         end
