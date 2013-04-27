@@ -1,8 +1,9 @@
 class AdvertisementsController < ApplicationController
-  #before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:show, :index]
   #########
   #CanCan
   #########
+
   load_and_authorize_resource
   #comments_controller
   #load_and_authorize_resource nested: :advertisement

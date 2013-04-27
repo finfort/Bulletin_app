@@ -7,15 +7,13 @@
 = image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@user.latitude}%2C#{@user.longitude}"
 -if can? :manage_roles, @user
   = simple_form_for(@user) do |f|
-    -#=f.association :roles,:collection => Role.global,   as: :check_boxes
-    =label_tag "Admin?"
-    = check_box_tag "user[admin]", @user.has_role?(:admin), @user.has_role?(:admin), disabled: true
-
-    =label_tag "user[moderator]", "Moderator?"
-    =check_box_tag "user[moderator]", @user.has_role?(:moderator), checked = @user.has_role?(:moderator)
-    =label_tag "user[user]", "User?"
-    = check_box_tag "user[user]", @user.has_role?(:user)
-    =f.button :submit
+    %fieldset
+      = hidden_field_tag "user[role_ids][]", nil
+      - Role.all.each do |r|
+        = label_tag dom_id(r), r.name, :class=> "checkbox"
+        = check_box_tag "user[role_ids][]", r.id, @user.role_ids.include?(r.id), id: dom_id(r)
+      %br
+      =f.button :submit, input_html: { class: 'btn-primary'}
 %div.advert
   - if @user.advertisements.any?
     %h3

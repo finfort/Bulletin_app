@@ -3,14 +3,11 @@ namespace :db do
   task populate: :environment do
     make_users
     make_advertisements
-    #make_relationships
+    make_comments
   end
 end
 
 def make_users
-  #Role.user
-  #Role.admin
-  #Role.moderator
   admin = User.create!(username:     "test",
                        full_name: "EXAMPLEovich",
                        email:    "example@example.org",
@@ -23,9 +20,38 @@ def make_users
                        country: "Ukraine",
                        zip: "83000")
 
-  admin.add_role("admin")
-  #admin.toggle!(:admin)
-  29.times do |n|
+  admin.add_role :admin
+
+  moderator = User.create!(username:     "moderator",
+                       full_name: "I am moderator",
+                       email:    "example@moderator.org",
+                       password: "test",
+                       password_confirmation: "test",
+                       birthday: "12.12.1255",
+                       address: "Ilicha 35",
+                       city: "Donetsk",
+                       state: "Donetsk",
+                       country: "Ukraine",
+                       zip: "83000")
+
+  moderator.add_role :moderator
+
+  user = User.create!(username:     "user",
+                       full_name: "Developer",
+                       email:    "example@developer.org",
+                       password: "test",
+                       password_confirmation: "test",
+                       birthday: "12.12.1255",
+                       address: "pr Mira 35",
+                       city: "Donetsk",
+                       state: "Donetsk",
+                       country: "Ukraine",
+                       zip: "83000")
+
+  user.add_role :user
+
+
+   9.times do |n|
     name  = Faker::Name.name
     email = Faker::Internet.email
     password  = "test"
@@ -45,9 +71,9 @@ def make_users
 end
 
 def make_advertisements
-  users = User.all(limit: 3)
+  users = User.all(limit: 15)
   #adv_img = Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample
-  30.times do
+  10.times do
     #adv_img = Dir.glob(Rails.root.join("app", "assets", "images", "*")).sample
     #adv_img = Dir.glob(File.join("assets/images", "*")).sample
    users.each { |user|
@@ -55,5 +81,16 @@ def make_advertisements
       content = Faker::Lorem.sentence(27)
       user.advertisements.create!(content: content, img: adv_img)
     }
+  end
+end
+def make_comments
+  advertisement = Advertisement.all(limit:30)
+  6.times do
+  advertisement.each { |adv|
+    author_name = Faker::Name.name
+    site_url= Faker::Internet.url
+    content = Faker::Lorem.sentence(5)
+    adv.comments.create!(author_name: author_name, site_url: site_url, content: content)
+  }
   end
 end

@@ -11,6 +11,7 @@ class Ability
     elsif user.has_role? :moderator
       can :manage, Advertisement
       can :manage, Comment
+      can :read, User
     elsif user.has_role? :user
         can :manage, Advertisement do |advertisement|
           advertisement.try(:user) == user
@@ -18,6 +19,12 @@ class Ability
         can :manage, Comment do |comment|
           comment.try(:user) == user
         end
+        can :manage, User# do |userRole|
+        cannot :manage, Role
+        #  userRole.try(:user) == user
+        #end
+    else
+      can :read, :all
     end
     # Define abilities for the passed in user here. For example:
     #
