@@ -217,7 +217,8 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
   #config.omniauth :twitter, ENV["TWITTER_CONSUMER_KEY"], ENV["TWITTER_CONSUMER_SECRET"]
   config.omniauth :twitter, 'g6rm2GJITBP1rL9lG7pZg', 'fLb2MNwhW5r8ukDSCX8jZ3fdSd5pnwaYbIK8fdL1fzs'
-  config.omniauth :facebook, '505074042882746', '23efb8a5d8c47f72e52d74b9196de9db'
+  config.omniauth :facebook, '505074042882746', '23efb8a5d8c47f72e52d74b9196de9db',
+  {:scope => 'email, offline_access', :client_options => {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}}
   #config.omniauth :google_oauth2, '844537373635.apps.googleusercontent.com', 'PAgLZowKpCsC63azEz9lEUon', { access_type: "offline", approval_prompt: "" }
   config.omniauth :google_apps, domain: 'gmail.com'
   # ==> Warden configuration
