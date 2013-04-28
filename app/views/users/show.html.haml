@@ -1,10 +1,16 @@
 =provide(:title, @user.username)
-%br User name:#{@user.username}
-%br Full name: #{@user.full_name}
-%br Birthday at: #{@user.birthday}
-%br Email:#{@user.email}
-%br Address is #{@user.addressFull}
-= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@user.latitude}%2C#{@user.longitude}"
+%dl.dl-horizontal.pull-left
+  %dt User name
+  %dd #{@user.username}
+  %dt Full name
+  %dd #{@user.full_name}
+  %dt Birthday at
+  %dd #{@user.birthday}
+  %dt Email
+  %dd #{@user.email}
+  %dt Adress
+  %dd #{@user.addressFull}
+= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@user.latitude}%2C#{@user.longitude}", class: "img-circle pull-right"
 -if can? :manage, @user.role
   = simple_form_for(@user) do |f|
     %fieldset

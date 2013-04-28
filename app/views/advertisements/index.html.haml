@@ -1,7 +1,7 @@
 %h1 Advertisements
-= render :partial => "shared/advertisement", :collection => @advertisement_items
--#= render @advertisement_items
-= will_paginate @advertisement_items, :renderer => BootstrapPagination::Rails
+%ul.thumbnails
+  = render :partial => "shared/advertisement", :collection => @advertisement_items
+  = will_paginate @advertisement_items, :renderer => BootstrapPagination::Rails
 
 -#%h1 Listing advertisements
 -#

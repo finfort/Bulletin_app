@@ -2,14 +2,19 @@
   .navbar-inner
     .container
       %nav
-        .logo.pull-left.brand
-          %a{ :href => root_path}Bulletin app
+        %a{ :href => root_path, class: 'brand' }Bulletin app
         %ul.nav.pull-right
+          %li
+            = form_tag advertisements_path, method: :get, :class => "navbar-search" do
+              .input-append
+                =text_field_tag :query, params[:query], class: "search-query", placeholder: "Search"
+                -#=submit_tag "Search", name: nil, class: "btn"
+
           %li= link_to "Ad", advertisements_path
           %li= link_to "Users", users_path
           -if user_signed_in?
             %li
-              %span Signed in as
+            -#%span Signed in as
 
             %li= link_to current_user.email, edit_user_registration_path
             %li= link_to('Logout', destroy_user_session_path, method: :delete)

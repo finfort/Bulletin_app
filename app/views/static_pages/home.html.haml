@@ -10,6 +10,6 @@
         -#= @advertisement.inspect
 - else
   - if @advertisement_items.any?
-    %ol.advertisements
+    %ul.thumbnails
       = render :partial => "shared/advertisement", :collection => @advertisement_items
       -#= will_paginate @advertisement_items, :renderer => BootstrapPagination::Rails

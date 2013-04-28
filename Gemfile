@@ -10,7 +10,7 @@ gem 'simple_form'
 gem 'haml-rails'
 gem 'country_select'
 gem 'geocoder'
-gem 'sendgrid'
+#gem 'sendgrid'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
@@ -25,16 +25,18 @@ gem 'rmagick'
 gem 'jquery-rails'
 gem 'coffee-rails'
 gem 'uglifier'
-
+#gem 'thinking-sphinx'
+gem 'pg_search'
 
 group :development, :test do
-gem 'sqlite3'
+#gem 'sqlite3'
+#gem 'mysql2'
+gem 'pg'
 gem 'pry'
 gem 'rspec-rails'
 end
 
 group :assets do
- # gem 'coffee-rails', '3.2.2'
 end
 
 group :test do
@@ -43,6 +45,6 @@ group :test do
 end
 
 group :production do
-  gem 'pg', '0.12.2'
+  gem 'pg'
   gem 'thin'
 end

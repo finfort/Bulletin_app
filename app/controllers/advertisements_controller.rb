@@ -37,7 +37,9 @@ class AdvertisementsController < ApplicationController
 
 
   def index
-   @advertisement_items = Advertisement.order('created_at DESC').paginate(page: params[:page], :per_page => 10)
+   #@advertisement_items = Advertisement.order('created_at DESC').paginate(page: params[:page], :per_page => 10)
+   @advertisement_items = Advertisement.text_search(params[:query]).order('created_at DESC').paginate(page: params[:page], :per_page => 10)
+
    #@user_who_commented = @current_user
    #@comment = Comment.build_from( Advertisement.last, User.first, "Hey this is my comment!" )
   end
