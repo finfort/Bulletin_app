@@ -4,7 +4,7 @@
     by Anatolii Ruchka
   %nav
     %ul
-      %li= link_to "Ad", 'ad_path'
+      %li= link_to "Ad", advertisements_path
       %li= link_to "Users", users_path
   = yield :scripts
   =debug(params) if Rails.env.development?
