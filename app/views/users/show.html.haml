@@ -5,7 +5,7 @@
 %br Email:#{@user.email}
 %br Address is #{@user.addressFull}
 = image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@user.latitude}%2C#{@user.longitude}"
--if can? :manage_roles, @user
+-if can? :manage, @user.role
   = simple_form_for(@user) do |f|
     %fieldset
       = hidden_field_tag "user[role_ids][]", nil

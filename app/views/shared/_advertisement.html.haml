@@ -2,7 +2,8 @@
   -#=image_tag advertisement.img_url.to_s
   %a{href: advertisement_url(advertisement)}
     = image_tag(advertisement.img_url(:thumb)) if advertisement.img_url
-  %span.content #{simple_format(RedCloth.new(html_escape(advertisement.content)).to_html)}
+  -#%span.content #{truncate(simple_format(RedCloth.new(html_escape(advertisement.content)).to_html), :length => 160)}
+  %span.content #{ simple_format(truncate(RedCloth.new(html_escape(advertisement.content)).to_html, :length => 160))}
   %span.timestamp
     Posted #{time_ago_in_words(advertisement.created_at)} ago by
   = link_to advertisement.user.username, advertisement.user

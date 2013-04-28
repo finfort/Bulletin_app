@@ -1,5 +1,5 @@
 module CommentsHelper
   def comments_count
-    pluralize(Comment.count, "comment")
+    "All "+ pluralize(Comment.count, "comment")
   end
 end

@@ -16,10 +16,19 @@ class Ability
         can :manage, Advertisement do |advertisement|
           advertisement.try(:user) == user
         end
-        can :manage, Comment do |comment|
+        can :read, Advertisement
+        can :create, Advertisement
+
+        can :manage, Comment  do |comment|
+          #comment.try(:advertisement_id) == comment.advertisement_id
           comment.try(:user) == user
         end
-        can :manage, User# do |userRole|
+        can :read, Comment
+        can :create, Comment
+
+        can :manage, User
+        # do |userRole|
+
         cannot :manage, Role
         #  userRole.try(:user) == user
         #end
