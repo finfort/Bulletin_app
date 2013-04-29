@@ -1,33 +1,31 @@
 class User < ActiveRecord::Base
-  rolify
   has_many :authentications
   has_many :advertisements, dependent: :destroy
-
-  attr_accessible :role_ids
-  belongs_to :role
-  after_create :assign_user_role
-
-  attr_accessible :roles
   has_many :comments#, as: :commentable
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable
+  belongs_to :role
+
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
-
-  attr_accessible :username, :email, :password, :password_confirmation, :remember_me, :role_id
-  attr_accessible :full_name, :birthday, :address, :city, :state, :country, :zip
-  validates :full_name, :birthday, :address, :city, :state, :country, :zip, :presence => true
-  #validates_uniqueness_of :username
-  validates :username, uniqueness: true
   # Virtual attribute for authenticating by either username or email
   # This is in addition to a real persisted field like 'username'
   attr_accessor :login
   attr_accessible :login
   attr_accessible :latitude, :longitude
-  geocoded_by :addressFull, :if => :address_changed?
-  after_validation :geocode
+  attr_accessible :role_ids
+  attr_accessible :roles
+  attr_accessible :username, :email, :password, :password_confirmation, :remember_me, :role_id
+  attr_accessible :full_name, :birthday, :address, :city, :state, :country, :zip
   attr_accessible :addressFull
+
+  validates :username, uniqueness: true
+  validates :full_name, :birthday, :address, :city, :state, :country, :zip, :presence => true
+
+  after_validation :geocode
+  after_create :assign_user_role
+
+  rolify
+  geocoded_by :addressFull, :if => :address_changed?
+
   def addressFull
     [address, city, state, country].join(' ')
   end

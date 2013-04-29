@@ -29,8 +29,8 @@ gem 'uglifier'
 gem 'pg_search'
 
 group :development, :test do
-#gem 'sqlite3'
-#gem 'mysql2'
+gem 'rake'
+gem 'simplecov', :require => false
 gem 'pg'
 gem 'pry'
 gem 'rspec-rails'

@@ -1,13 +1,6 @@
 class CommentsController < ApplicationController
   load_and_authorize_resource
 ###################
-  def new
-  end
-
-  def index
-
-  end
-
   def create
     @advertisement= Advertisement.find(params[:advertisement_id])
     @comment = @advertisement.comments.new(params[:comment])

@@ -1,4 +1,4 @@
-#Bulletin app
+#Bulletin app[![Build Status](https://travis-ci.org/finfort/Bulletin_app.png?branch=master)](https://travis-ci.org/finfort/Bulletin_app)
 Application was made for applying on a job.
 
 ##How to install
