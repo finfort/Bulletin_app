@@ -1,12 +1,11 @@
 class AdvertisementsController < ApplicationController
   before_filter :authenticate_user!, :except => [:show, :index]
+  before_filter :find_advertisement, :only => [:show, :edit, :update, :destroy]
   #########
   #CanCan
   #########
 
   load_and_authorize_resource
-  #comments_controller
-  #load_and_authorize_resource nested: :advertisement
   ########
   #end CanCan
   ########
@@ -22,11 +21,9 @@ class AdvertisementsController < ApplicationController
   end
 
   def edit
-    @advertisement = Advertisement.find(params[:id])
   end
 
   def update
-    @advertisement = Advertisement.find(params[:id])
     if @advertisement.update_attributes(params[:advertisement])
       flash.notice= "Advert updated!"
       redirect_to @advertisement.user
@@ -37,25 +34,22 @@ class AdvertisementsController < ApplicationController
 
 
   def index
-   #@advertisement_items = Advertisement.order('created_at DESC').paginate(page: params[:page], :per_page => 10)
    @advertisement_items = Advertisement.text_search(params[:query]).order('created_at DESC').paginate(page: params[:page], :per_page => 10)
-
-   #@user_who_commented = @current_user
-   #@comment = Comment.build_from( Advertisement.last, User.first, "Hey this is my comment!" )
   end
 
   def show
-    @advertisement = Advertisement.find(params[:id])
     @comment= Comment.new(:advertisement => @advertisement)
-    #@comment= @advertisement.comments
   end
 
   def destroy
-    @advertisement = Advertisement.find(params[:id])
     @advertisement.destroy
     flash.notice = "Successfully destroyed advert."
-    #redirect_to :controller => "user", :action => "show"
-    #redirect_to :controller => "user", :action => "show", :id => @advertisement.user.id
     redirect_to @advertisement.user
   end
+
+  protected
+  def find_advertisement
+    @advertisement = Advertisement.find(params[:id])
+  end
+
 end

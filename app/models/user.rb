@@ -2,7 +2,6 @@ class User < ActiveRecord::Base
   rolify
   has_many :authentications
   has_many :advertisements, dependent: :destroy
-  #has_and_belongs_to_many :roles
 
   attr_accessible :role_ids
   belongs_to :role
@@ -16,14 +15,13 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  # Setup accessible (or protected) attributes for your model
   attr_accessible :username, :email, :password, :password_confirmation, :remember_me, :role_id
-  #  attr_accessible :title, :body
   attr_accessible :full_name, :birthday, :address, :city, :state, :country, :zip
   validates :full_name, :birthday, :address, :city, :state, :country, :zip, :presence => true
-  validates_uniqueness_of :username
-# Virtual attribute for authenticating by either username or email
-# This is in addition to a real persisted field like 'username'
+  #validates_uniqueness_of :username
+  validates :username, uniqueness: true
+  # Virtual attribute for authenticating by either username or email
+  # This is in addition to a real persisted field like 'username'
   attr_accessor :login
   attr_accessible :login
   attr_accessible :latitude, :longitude
@@ -34,14 +32,7 @@ class User < ActiveRecord::Base
     [address, city, state, country].join(' ')
   end
 
-  ###############
-  #CanCan code
-  ###############
-
-  ###########
-  #end CanCan
-  ##########
-   def self.find_first_by_auth_conditions(warden_conditions)
+  def self.find_first_by_auth_conditions(warden_conditions)
       conditions = warden_conditions.dup
       if login = conditions.delete(:login)
         where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
@@ -84,9 +75,5 @@ class User < ActiveRecord::Base
   def assign_user_role
     self.add_role "user"
   end
-
-### This is the correct method you override with the code above
-### def self.find_for_database_authentication(warden_conditions)
-### end
 
 end

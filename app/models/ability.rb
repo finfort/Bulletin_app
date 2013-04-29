@@ -6,7 +6,6 @@ class Ability
 
 
     if user.has_role? :admin
-      can :manage, Role
       can :manage, :all
     elsif user.has_role? :moderator
       can :manage, Advertisement
