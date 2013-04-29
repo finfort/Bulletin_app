@@ -10,7 +10,6 @@ gem 'simple_form'
 gem 'haml-rails'
 gem 'country_select'
 gem 'geocoder'
-#gem 'sendgrid'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
@@ -25,13 +24,15 @@ gem 'rmagick'
 gem 'jquery-rails'
 gem 'coffee-rails'
 gem 'uglifier'
-#gem 'thinking-sphinx'
+gem 'pg'
 gem 'pg_search'
+gem 'coveralls', require: false
+
+
 
 group :development, :test do
 gem 'rake'
 gem 'simplecov', :require => false
-gem 'pg'
 gem 'pry'
 gem 'rspec-rails'
 end
@@ -41,7 +42,8 @@ end
 
 group :test do
   gem 'factory_girl_rails'
-  gem 'capybara', '1.1.2'
+  gem 'capybara'
+  gem 'guard-rspec'
 end
 
 group :production do
