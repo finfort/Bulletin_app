@@ -27,7 +27,7 @@ gem 'uglifier'
 gem 'pg'
 gem 'pg_search'
 gem 'coveralls', require: false
-
+gem "database_cleaner", "~> 0.9.1"
 
 
 group :development, :test do
@@ -37,13 +37,12 @@ gem 'pry'
 gem 'rspec-rails'
 end
 
-group :assets do
-end
 
 group :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'guard-rspec'
+  gem 'rb-inotify', '~> 0.8.8'
 end
 
 group :production do

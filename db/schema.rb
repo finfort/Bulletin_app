@@ -17,12 +17,8 @@ ActiveRecord::Schema.define(:version => 20130428175841) do
     t.string   "content"
     t.integer  "user_id"
     t.string   "img"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-    t.string   "img_file_name"
-    t.string   "img_content_type"
-    t.integer  "img_file_size"
-    t.datetime "img_updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "comments", :force => true do |t|
@@ -30,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20130428175841) do
     t.string   "author_name"
     t.string   "site_url"
     t.text     "content"
+    t.integer  "user_id"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
   end
@@ -45,7 +42,16 @@ ActiveRecord::Schema.define(:version => 20130428175841) do
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
 
+  create_table "roles_users", :id => false, :force => true do |t|
+    t.integer "role_id"
+    t.integer "user_id"
+  end
+
   create_table "users", :force => true do |t|
+    t.string   "login",                  :default => "",           :null => false
+    t.string   "full_name",              :default => "",           :null => false
+    t.date     "birthday",               :default => '1980-01-01', :null => false
+    t.string   "address",                :default => "",           :null => false
     t.string   "email",                  :default => "",           :null => false
     t.string   "encrypted_password",     :default => "",           :null => false
     t.string   "reset_password_token"
@@ -59,8 +65,6 @@ ActiveRecord::Schema.define(:version => 20130428175841) do
     t.datetime "created_at",                                       :null => false
     t.datetime "updated_at",                                       :null => false
     t.string   "username"
-    t.string   "full_name"
-    t.string   "address"
     t.string   "city"
     t.string   "state"
     t.string   "country"
@@ -69,8 +73,6 @@ ActiveRecord::Schema.define(:version => 20130428175841) do
     t.float    "longitude"
     t.string   "provider"
     t.string   "uid"
-    t.string   "string"
-    t.date     "birthday",               :default => '2013-04-17'
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

@@ -1,4 +1,5 @@
 BulletinApp::Application.configure do
+  config.action_mailer.default_url_options = { :host => '0.0.0.0:3000' }
   # Settings specified here will take precedence over those in config/application.rb
 
   # In the development environment your application's code is reloaded on
@@ -37,7 +38,6 @@ BulletinApp::Application.configure do
 
 
 
-  config.action_mailer.default_url_options = { :host => '0.0.0.0:3000' }
 #config.action_mailer.delivery_method = :sendmail
 # Defaults to:
 # config.action_mailer.sendmail_settings = {

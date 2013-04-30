@@ -19,3 +19,28 @@ describe "UserPages" do
   #end
 
 end
+
+describe "Pages" do
+
+  describe "HomePage" do
+    it "should have title Bulletin App Test Task" do
+      visit root_path
+      page.should have_content("BulletinApp Test Task")
+    end
+  end
+
+  describe "AdvertisementPage" do
+    it "should have Advertisement content" do
+     visit advertisements_path
+     page.should have_content("Advertisements")
+    end
+  end
+
+  describe "UsersPage" do
+    it "should have Users content" do
+     visit users_path
+     page.should have_content("Users")
+    end
+  end
+
+end
