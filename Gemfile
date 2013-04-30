@@ -28,7 +28,7 @@ gem 'pg'
 gem 'pg_search'
 gem 'coveralls', require: false
 gem "database_cleaner", "~> 0.9.1"
-
+gem "rails_best_practices"
 
 group :development, :test do
   gem 'rake'

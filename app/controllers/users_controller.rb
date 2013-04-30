@@ -29,36 +29,4 @@ class UsersController < ApplicationController
       render @user
     end
   end
-
-  def assign_moderator_role
-    @user = User.find(params[:id])
-    @user.add_role "moderator"
-    redirect_to @user
-  end
-
-  def remove_moderator_role
-    @user = User.find(params[:id])
-    @user.remove_role "moderator"
-    redirect_to @user
-  end
-
-  def assign_user_role
-    @user = User.find(params[:id])
-    @user.add_role "user"
-    redirect_to @user
-  end
-
-  def remove_user_role
-    @user = User.find(params[:id])
-    @user.remove_role "user"
-    redirect_to @user
-  end
-
-  private
-  def load_roles
-    @roles = Role.all
-  end
-  def find_resource
-    @user ||= User.find params[:id]
-  end
 end

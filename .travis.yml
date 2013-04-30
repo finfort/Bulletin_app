@@ -3,4 +3,3 @@ rvm:
   - 2.0.0
 before_script:
   - psql -c 'create database project_test;'
-  - psql -c 'create database travis;'

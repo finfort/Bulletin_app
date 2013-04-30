@@ -4,7 +4,6 @@ class AdvertisementsController < ApplicationController
   #########
   #CanCan
   #########
-
   load_and_authorize_resource
   ########
   #end CanCan
@@ -17,7 +16,6 @@ class AdvertisementsController < ApplicationController
     else
       render "static_pages/home"
     end
-
   end
 
   def edit
