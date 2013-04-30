@@ -31,14 +31,13 @@ gem "database_cleaner", "~> 0.9.1"
 
 
 group :development, :test do
-gem 'rake'
-gem 'simplecov', :require => false
-#gem 'pry'
-gem 'rspec-rails'
+  gem 'rake'
+  gem 'rspec-rails'
 end
 
 
 group :test do
+  gem 'simplecov', :require => false
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'guard-rspec'
