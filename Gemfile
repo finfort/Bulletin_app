@@ -33,7 +33,7 @@ gem "database_cleaner", "~> 0.9.1"
 group :development, :test do
 gem 'rake'
 gem 'simplecov', :require => false
-gem 'pry'
+#gem 'pry'
 gem 'rspec-rails'
 end
 

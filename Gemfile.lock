@@ -284,7 +284,6 @@ DEPENDENCIES
   omniauth-twitter
   pg
   pg_search
-  pry
   rails (= 3.2.13)
   rake
   rb-inotify (~> 0.8.8)
