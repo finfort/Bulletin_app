@@ -1,12 +1,14 @@
 language: ruby
 #TRAVIS_RUBY_VERSION = 2.0.0
 rvm:
-  - 1.19.1
+  - 2.0.0p0
 env:
   - DB=postgresql
-before_install:
-  - gem update --system
-  - gem --version
+#before_install:
+#  - gem update --system
+#  - gem --version
 before_script:
+  - "bundle exec rake db:drop db:create db:migrate"
   - psql -c 'create database travis;'
   - psql -c 'create database project_test;'
+script: "bundle exec rspec spec/"
