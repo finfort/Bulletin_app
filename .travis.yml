@@ -8,6 +8,7 @@ env:
 #  - gem update --system
 #  - gem --version
 before_script:
+  - psql -c 'CREATE ROLE tolik;'
   - "bundle exec rake db:drop db:create db:migrate"
   - psql -c 'create database travis;'
   - psql -c 'create database project_test;'
