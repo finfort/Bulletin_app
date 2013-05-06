@@ -1,7 +1,7 @@
 language: ruby
 #TRAVIS_RUBY_VERSION = 2.0.0
 rvm:
-  - 2.0.0p0
+  - 2.0.0
 env:
   - DB=postgresql
 #before_install:
