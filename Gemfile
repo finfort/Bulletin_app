@@ -29,6 +29,7 @@ gem 'pg_search'
 gem 'coveralls', require: false
 gem "database_cleaner", "~> 0.9.1"
 gem "rails_best_practices"
+gem "travis"
 
 group :development, :test do
   gem 'rake'
@@ -42,6 +43,7 @@ group :test do
   gem 'capybara'
   gem 'guard-rspec'
   gem 'rb-inotify', '~> 0.8.8'
+  gem 'launchy'
 end
 
 group :production do

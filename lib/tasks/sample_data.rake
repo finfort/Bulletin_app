@@ -9,6 +9,7 @@ end
 
 def make_users
   admin = User.create!(username:     "test",
+                       login:       "test",
                        full_name: "EXAMPLEovich",
                        email:    "example@example.org",
                        password: "test",
@@ -72,7 +73,6 @@ end
 
 def make_advertisements
   users = User.all(limit: 15)
-  #adv_img = Dir.glob(File.join(Rails.root, 'sampleimages', '*')).sample
   10.times do
     #adv_img = Dir.glob(Rails.root.join("app", "assets", "images", "*")).sample
     #adv_img = Dir.glob(File.join("assets/images", "*")).sample

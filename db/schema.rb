@@ -48,9 +48,14 @@ ActiveRecord::Schema.define(:version => 20130428175841) do
   end
 
   create_table "users", :force => true do |t|
+    t.string   "username",               :default => "",           :null => false
     t.string   "login",                  :default => "",           :null => false
     t.string   "full_name",              :default => "",           :null => false
     t.date     "birthday",               :default => '1980-01-01', :null => false
+    t.string   "city",                   :default => "",           :null => false
+    t.string   "state",                  :default => "",           :null => false
+    t.string   "country",                :default => "",           :null => false
+    t.decimal  "zip",                                              :null => false
     t.string   "address",                :default => "",           :null => false
     t.string   "email",                  :default => "",           :null => false
     t.string   "encrypted_password",     :default => "",           :null => false
@@ -64,11 +69,6 @@ ActiveRecord::Schema.define(:version => 20130428175841) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                                       :null => false
     t.datetime "updated_at",                                       :null => false
-    t.string   "username"
-    t.string   "city"
-    t.string   "state"
-    t.string   "country"
-    t.decimal  "zip"
     t.float    "latitude"
     t.float    "longitude"
     t.string   "provider"
