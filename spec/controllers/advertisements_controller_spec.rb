@@ -21,7 +21,6 @@ describe AdvertisementsController do
       visit root_path
       #save_and_open_page
       response.should have_content(user.username)
-      #response.should be_success
     end
   end
 
@@ -75,23 +74,33 @@ describe AdvertisementsController do
     end
   end
 
+  describe "Destroy advertisement" do
+    it "should destroy advert" do
+      user = FactoryGirl.create(:admin)
+      #advertisement= FactoryGirl.create(:advertisement)
+      login_as(user, :scope => :user)
+      #visit advertisement_path(advertisement)
+      advertisement = Advertisement.create!(user_id: user.id, content: "ol")
+      #raise user.to_yaml
+      #hvisit _path(
+      #save_and_open_page
+      #click_link "Destroy"
+      response.should include("Successfully destroyed advert.")
+    end
+  end
   describe "PUT 'update'" do
 
-      #page.driver.post new_user_session_path, :login => user.login, :password => 'test'
-     before(:each) do
+    before(:each) do
       Warden.test_reset!
     end
 
     context "valid attributes" do
-
       it "located the requested @advertisement" do
-
       user = FactoryGirl.create(:admin)
       #@advertisement = FactoryGirl.create(:advertisement)
       @advertisement = Advertisement.create!(user_id:  user.id,content:  "Text" )
       login_as(user, :scope => :user)
        # expect(user.has_role? :admin).to be_true WORKS!
-
         visit edit_user_registration_path(user)
         @advertisement.reload
         #fill_in "advertisement_content", with: "new text"

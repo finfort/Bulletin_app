@@ -11,4 +11,11 @@ require 'spec_helper'
 #   end
 # end
 describe CommentsHelper do
+  describe "comments count" do
+    it "returns the count of comments" do
+      comment = FactoryGirl.create(:comment)
+      helper.comments_count.should eql("All #{pluralize(Comment.count,"comment")}")
+    end
+  end
+
 end

@@ -3,9 +3,9 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!, :except => [:show, :index]
   #before_filter :load_roles, :only => [:new, :edit, :update, :create]
 
-  def new
+  #def new
 
-  end
+  #end
 
   def show
     @user = User.find(params[:id])
@@ -16,17 +16,17 @@ class UsersController < ApplicationController
     @users = User.paginate(page: params[:page], :per_page => 10)
   end
 
-  def edit
-    @user= User.find(params[:id])
-  end
+  #def edit
+  #  @user= User.find(params[:id])
+  #end
 
-  def update
-    @user= User.find(params[:id])
-    if @user.update_attributes(params[:user])
-      flash[:notice]= "User updated"
-      redirect_to @user
-    else
-      render @user
-    end
-  end
+  #def update
+  #  @user= User.find(params[:id])
+  #  if @user.update_attributes(params[:user])
+  #    flash[:notice]= "User updated"
+  #    redirect_to @user
+  #  else
+  #    render @user
+  #  end
+  #end
 end

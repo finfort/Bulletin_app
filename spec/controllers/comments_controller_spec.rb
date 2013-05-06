@@ -5,10 +5,10 @@ describe CommentsController do
     context "with valid attributes" do
       before :each do
         #Warden.test_reset!
-        user = FactoryGirl.create(:user)
+        user = FactoryGirl.create(:admin)
         login_as(user, :scope => :user)
       end
-      it "saves the new advertisement in the database"do
+      it "add  new comment in the database"do
         expect{
           advertisement= FactoryGirl.create(:advertisement)
           visit advertisement_path(advertisement)
@@ -20,15 +20,15 @@ describe CommentsController do
       end
 
       it "render new action when comments fails to create" do
-          #advertisement= FactoryGirl.create(:advertisement)
-          #comment = FactoryGirl.create(:comment)
-          #post :create, id: comment, content: FactoryGirl.attributes_for(:invalid_comment)
-          #response.should render_template :new
-        #expect{
-        #  advertisement= FactoryGirl.create(:advertisement)
-        #  visit advertisement_path(advertisement)
-        #  click_button "Submit"
-        #}.to render_template :new
+        #        expect{
+        #          advertisement= FactoryGirl.create(:advertisement)
+        #          visit advertisement_path(advertisement)
+        #          fill_in "comment_author_name", with: "name"
+        #          fill_in "comment_site_url", with: "url"
+        #          fill_in "comment_content", with: ""
+        #          click_button "Submit"
+        #        }.to render_template :new
+        #
       end
     end
 

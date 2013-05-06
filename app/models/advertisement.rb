@@ -1,7 +1,7 @@
 class Advertisement < ActiveRecord::Base
   has_many :comments, dependent: :destroy
 
-  attr_accessible :user_id, :content, :img
+  attr_accessible :user_id, :content, :img, :user
 
   belongs_to :user
 

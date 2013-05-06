@@ -20,21 +20,35 @@ Warden.test_mode!
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
-  #config.before(:suite) do
-  #  DatabaseCleaner.strategy = :transaction
-  #  DatabaseCleaner.clean_with(:truncation)
-  #end
+  config.use_transactional_examples = false
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
 
-  #config.before(:each) do
-  #  DatabaseCleaner.start
-  #end
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
 
-  #config.after(:each) do
-  #  DatabaseCleaner.clean
-  #end
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 
   config.include Devise::TestHelpers, :type => :controller
+  config.include Devise::TestHelpers, :type => :view
   config.include RequestMacros, :type => :request
+
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.add_mock(:twitter, {
+    :uid => '12345',
+    :nickname => 'fooman',
+    :user_info => {
+      :first_name => 'Foo',
+      :last_name => 'Man'
+    }
+  })
+
+
   # ## Mock Framework
   #
   #
@@ -46,7 +60,7 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  #config.use_transactional_fixtures = true
 
   # If true, the base class of anonymous controllers will be inferred
   # automatically. This will be the default behavior in future versions of
