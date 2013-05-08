@@ -11,21 +11,33 @@ To run application
     rake db:migrate
     rake db:populate
     rails s
+
+##Run tests
+
+    rake db:test:prepare
+    rake spec
+
 ##Roles
 
 Admin role:
 login test
 password test
-
+***
 Moderator role:
 login moderator
 password test
-
+***
 User role:
 login user
 password test
 
 ##[Demo]
+
+TODO:
+  Increase test coverage (deal with advertisement and comments controller)
+  Clean repository from tmp files
+  Add comments ajax notifications
+
 
 ###Доска объявлений
 - Пользовательская система:
