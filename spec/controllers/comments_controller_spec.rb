@@ -80,7 +80,7 @@ describe CommentsController do
         #@comment_attributes = FactoryGirl.attributes_for(:comment, :advertisement_id => advertisement)
         #post :create, :advertisement_id => advertisement, :comment => @comment_attributes
         #raise @comment.to_yaml
-        raise advertisement.to_yaml
+        #raise advertisement.to_yaml
         #visit advertisement_comment_path(advertisemet, comment)
         #visit advertisement_path(advertisement)
         #visit edit_advertisement_comment_path(@comment)
