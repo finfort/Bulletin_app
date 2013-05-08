@@ -65,22 +65,23 @@ describe CommentsController do
       end
     end
     describe "Delete commment" do
-    let(:user) {FactoryGirl.create(:admin)}
-    let(:advertisement) {FactoryGirl.create(:advertisement,user_id: user.id )}
 
-    before {
-      login_as(user, :scope => :user)
-      #@comment= advertisement.comments.build(content: "text", site_url: "url", author_name: "name")
-      comment= advertisement.comments.create(content: "text", site_url: "url", author_name: "name")
-    }
+    #before {
+    #      }
       it "deletes a comment", js: true do
+        user = FactoryGirl.create(:admin)
+        login_as(user, :scope => :user)
+        advertisement = FactoryGirl.create(:advertisement)#,user: user )
+        #comment = advertisement.comments.create(content: "text", site_url: "url", author_name: "name")
+        comment = FactoryGirl.create(:comment, advertisement: advertisement)
         #Comment.create(subject: 'The Great Yogurt', body: 'The Schwarz is strong with this one.')
         #advertisement= FactoryGirl.create(:advertisement)
         #raise advertisement.to_yaml
         #@comment_attributes = FactoryGirl.attributes_for(:comment, :advertisement_id => advertisement)
         #post :create, :advertisement_id => advertisement, :comment => @comment_attributes
         #raise @comment.to_yaml
-        #raise advertisement.to_yaml
+        raise advertisement.to_yaml
+        #visit advertisement_comment_path(advertisemet, comment)
         #visit advertisement_path(advertisement)
         #visit edit_advertisement_comment_path(@comment)
         #save_and_open_page

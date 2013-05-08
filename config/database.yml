@@ -1,35 +1,9 @@
-development:
-  adapter: postgresql
-  encoding: utf8
-  database: bulletin_app_development
-  pool: 5
-  username: tolik
-  password:
-
-test: &TEST
-  adapter: postgresql
-  encoding: utf8
-  database: bulletin_app_test
-  pool: 5
-  username: tolik
-  password:
-
-production:
-  adapter: postgresql
-  encoding: utf8
-  database: bulletin_app_production
-  pool: 5
-  username: tolik
-  password:
-
-cucumber:
-  <<: *TEST
 #development:
 #  adapter: postgresql
 #  encoding: utf8
 #  database: bulletin_app_development
 #  pool: 5
-#  username: postgres
+#  username: tolik
 #  password:
 #
 #test: &TEST
@@ -37,7 +11,7 @@ cucumber:
 #  encoding: utf8
 #  database: bulletin_app_test
 #  pool: 5
-#  username: postgres
+#  username: tolik
 #  password:
 #
 #production:
@@ -45,8 +19,34 @@ cucumber:
 #  encoding: utf8
 #  database: bulletin_app_production
 #  pool: 5
-#  username: postgres
+#  username: tolik
 #  password:
 #
 #cucumber:
 #  <<: *TEST
+development:
+  adapter: postgresql
+  encoding: utf8
+  database: bulletin_app_development
+  pool: 5
+  username: postgres
+  password:
+
+test: &TEST
+  adapter: postgresql
+  encoding: utf8
+  database: bulletin_app_test
+  pool: 5
+  username: postgres
+  password:
+
+production:
+  adapter: postgresql
+  encoding: utf8
+  database: bulletin_app_production
+  pool: 5
+  username: postgres
+  password:
+
+cucumber:
+  <<: *TEST
