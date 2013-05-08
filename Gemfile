@@ -44,6 +44,7 @@ group :test do
   gem 'guard-rspec'
   gem 'rb-inotify', '~> 0.8.8'
   gem 'launchy'
+  gem 'selenium-webdriver'
 end
 
 group :production do

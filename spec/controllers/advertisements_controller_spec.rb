@@ -2,7 +2,6 @@ require 'spec_helper'
 describe AdvertisementsController do
 
   describe "GET #index" do
-
     #it "populates an array of advertisements" do
     #  advertisement = FactoryGirl.create(:advertisement)
     #  get :index
@@ -58,10 +57,6 @@ describe AdvertisementsController do
       #  response.should redirect_to
       #end
 
-      #it "should have a success flash message" do
-      #  post :create, advertisement: FactoryGirl.create(:advertisement)
-      #  page.should have_content("Advert created!")
-      #end
     end
 
     context "with invalid attributes" do
@@ -89,27 +84,30 @@ describe AdvertisementsController do
     end
   end
   describe "PUT 'update'" do
-
-    before(:each) do
+    before :each do
       Warden.test_reset!
+      user = FactoryGirl.create(:admin)
+      advertisement = FactoryGirl.create(:advertisement)
+      login_as(user, :scope => :user)
     end
 
-    context "valid attributes" do
+    describe "valid attributes" do
+      #it "update advertisement in the database"do
+      #  expect{
+      #  visit edit_advertisement_path(advertisement)
+      #  fill_in "advertisement_content", with: "text"
+      #  click_button  "Update Advertisement"
+      #  }.to have_content("Advert updated!")
+      #  #redirect_to @advertisement.user
+      #  #page.should have_content("Advert updated!")
+      #end
+
       it "located the requested @advertisement" do
-      user = FactoryGirl.create(:admin)
-      #@advertisement = FactoryGirl.create(:advertisement)
-      @advertisement = Advertisement.create!(user_id:  user.id,content:  "Text" )
-      login_as(user, :scope => :user)
-       # expect(user.has_role? :admin).to be_true WORKS!
-        visit edit_user_registration_path(user)
-        @advertisement.reload
-        #fill_in "advertisement_content", with: "new text"
-        #save_and_open_page
-        #click_button "Update Advertisement"
+        # expect(user.has_role? :admin).to be_true WORKS!
+        #@advertisement.reload
         #expect(page).to render_template("static_page/home")
         #expect(flash[:notice]).to eq("Advert updated!")
         #assigns(:advertisement).should eq(@attr)
-        #response.should be_successful
       end
 
       it "changes @advertisement attributes" do
@@ -120,10 +118,6 @@ describe AdvertisementsController do
         #save_and_open_page
       end
 
-      it "redirects to the updated advertisement" do
-        #put :update, id: @advertisement, advertisement: FactoryGirl.attributes_for(:advertisement)
-        #response.should redirect_to root_path#@advertisement
-      end
     end
 
   end

@@ -1,6 +1,6 @@
 class AdvertisementsController < ApplicationController
   before_filter :authenticate_user!, :except => [:show, :index]
-  before_filter :find_advertisement, :only => [:show, :edit, :update, :destroy]
+  #before_filter :find_advertisement, :only => [:show, :edit, :update, :destroy]
   #########
   #CanCan
   #########
@@ -19,9 +19,11 @@ class AdvertisementsController < ApplicationController
   end
 
   def edit
+    @advertisement = Advertisement.find(params[:id])
   end
 
   def update
+    @advertisement = Advertisement.find(params[:id])
     if @advertisement.update_attributes(params[:advertisement])
       flash.notice= "Advert updated!"
       redirect_to @advertisement.user
@@ -36,18 +38,20 @@ class AdvertisementsController < ApplicationController
   end
 
   def show
+    @advertisement = Advertisement.find(params[:id])
     @comment= Comment.new(:advertisement => @advertisement)
   end
 
   def destroy
+    @advertisement = Advertisement.find(params[:id])
     @advertisement.destroy
     flash.notice = "Successfully destroyed advert."
     redirect_to @advertisement.user
   end
 
-  protected
-  def find_advertisement
-    @advertisement = Advertisement.find(params[:id])
-  end
+  #protected
+  #def find_advertisement
+  #  @advertisement = Advertisement.find(params[:id])
+  #end
 
 end
