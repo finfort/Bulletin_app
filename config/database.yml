@@ -23,7 +23,8 @@
 #  password:
 #
 #cucumber:
-# <<: *TEST
+#  <<: *TEST
+
 development:
   adapter: postgresql
   encoding: utf8
