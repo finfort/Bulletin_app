@@ -4,33 +4,33 @@
   <%= devise_error_messages! %>
 
   <%= f.input  :username %>
-  <% if f.object.full_name_required? %>
+  <%# if f.object.full_name_required? %>
     <%= f.input  :full_name %>
-  <% end %>
-  <% if f.object.email_required? %>
+  <% #end %>
+  <%# if f.object.email_required? %>
     <%= f.input  :email, label: 'Your email here' %>
-  <% end %>
+  <% #end %>
 
   <%# if f.object.birthday_required? %>
     <%= f.input  :birthday, label: 'Your birthday here' %>
   <%# end %>
 
-  <% if f.object.address_required? %>
+  <% #if f.object.address_required? %>
     <%= f.input  :address, label: 'Your address here' %>
-  <% end %>
+  <%# end %>
 
-  <% if f.object.city_required? %>
+  <% #if f.object.city_required? %>
     <%= f.input  :city, label: 'Your city here' %>
-  <% end %>
-  <% if f.object.state_required? %>
+  <% #end %>
+  <% #if f.object.state_required? %>
     <%= f.input  :state, label: 'Your state here' %>
-  <% end %>
-  <% if f.object.country_required? %>
+  <% #end %>
+  <% #if f.object.country_required? %>
     <%= f.input  :country, label: 'Your country here' %>
-  <% end %>
-  <% if f.object.zip_required? %>
+  <% #end %>
+  <% #if f.object.zip_required? %>
     <%= f.input  :zip, label: 'Zip' %>
-  <% end %>
+  <%# end %>
 
   <% if f.object.password_required? %>
     <div><%= f.label :password %><br />
