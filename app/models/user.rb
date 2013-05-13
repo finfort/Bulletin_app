@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
       user.uid = auth.uid
       user.username = auth.info.nickname ||Faker::Name.name
       #raise auth.to_yaml
-      user.email = auth.info.email || Faker::Internet.email# if email.blank?
+      user.email = auth.info.email || user.username + "@example.com"# if email.blank?
       user.zip = "000000"
     end
   end
