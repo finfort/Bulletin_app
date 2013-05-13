@@ -17,16 +17,6 @@ class Advertisement < ActiveRecord::Base
     using: {tsearch: {dictionary: "english"}},
     associated_against: {users: [:user_name, :address, :city, :full_name], comments: [:author_name, :content, :site_url]}
 
-#ThinkingSphinx::Index.define_for :advertisements, :with => :real_time do
-#  indexes content
-#end
-  #define_index do
-  # indexes content
-  # indexes :name, sortable: true
-  # indexes comments.content, as: :comment_content
-  # indexes [author.first_name, author.last_name], as: :author_name
-
-  #end
   def self.text_search(query)
     if query.present?
       where("content @@ :q", q: query)

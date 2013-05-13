@@ -15,8 +15,11 @@
           -if user_signed_in?
             %li
             -#%span Signed in as
+            -if !current_user.email.blank?
+              %li= link_to current_user.email, edit_user_registration_path
+            -else
+              %li= link_to current_user.username, edit_user_registration_path
 
-            %li= link_to current_user.email, edit_user_registration_path
             %li= link_to('Logout', destroy_user_session_path, method: :delete)
           -else
             %li= link_to "Sign up", new_user_registration_path

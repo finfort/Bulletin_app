@@ -1,0 +1,42 @@
+<h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <p><%= f.label :username %><br />
+  <%= f.text_field :username %></p>
+
+  <p><%= f.label :full_name%><br />
+  <%= f.text_field :full_name%></p>
+
+  <%= f.input  :email, label: 'Your email here' %>
+  <%= f.input  :birthday, label: 'Your birthday here' %>
+  <%= f.input  :address, label: 'Your address here' %>
+  <%= f.input  :city, label: 'Your city here' %>
+  <%= f.input  :state, label: 'Your state here' %>
+  <%= f.input  :country, label: 'Your country here' %>
+  <%= f.input  :zip, label: 'Zip' %>
+
+  <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@user.latitude}%2C#{@user.longitude}" %>
+
+
+  <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+  <%= f.password_field :password %></div>
+
+  <div><%= f.label :password_confirmation %><br />
+  <%= f.password_field :password_confirmation %></div>
+
+
+  <% if f.object.encrypted_password.present? %>
+    <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+    <%= f.password_field :current_password %></div>
+  <% end %>
+
+  <div><%= f.submit "Update" %></div>
+<% end %>
+
+<h3>Cancel my account</h3>
+
+<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</p>
+
+<%= link_to "Back", :back %>

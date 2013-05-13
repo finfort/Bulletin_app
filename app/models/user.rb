@@ -6,9 +6,7 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
-  # Virtual attribute for authenticating by either username or email
-  # This is in addition to a real persisted field like 'username'
-  attr_accessor :login
+  attr_accessor   :login
   attr_accessible :login
   attr_accessible :latitude, :longitude
   attr_accessible :role_ids
@@ -18,7 +16,7 @@ class User < ActiveRecord::Base
   attr_accessible :addressFull
 
   validates :username, uniqueness: true
-  validates :full_name, :birthday, :address, :city, :state, :country, :zip, :presence => true
+  #validates :full_name, :birthday, :address, :city, :state, :country, :zip, :presence => true
 
   after_validation :geocode
   after_create :assign_user_role
@@ -43,7 +41,10 @@ class User < ActiveRecord::Base
     where(auth.slice(:provider, :uid)).first_or_create do |user|
       user.provider = auth.provider
       user.uid = auth.uid
-      user.username = auth.info.nickname
+      user.username = auth.info.nickname ||Faker::Name.name
+      #raise auth.to_yaml
+      user.email = auth.info.email || Faker::Internet.email# if email.blank?
+      user.zip = "000000"
     end
   end
 
@@ -57,6 +58,34 @@ class User < ActiveRecord::Base
       super
     end
   end
+  def birthday_required?
+    !birthday.blank? && super
+  end
+
+  def email_required?
+    !email.blank? && super
+  end
+  def city_required?
+    !city.blank? && super
+  end
+  def country_required?
+    !country.blank? && super
+  end
+  def zip_required?
+    !zip.blank? && super
+  end
+
+  def full_name_required?
+    !full_name.blank? && super
+  end
+  def address_required?
+    (!address.blank?) && super
+  end
+ def state_required?
+    (!state.blank?) && super
+  end
+
+
 
   def password_required?
     super && provider.blank?
@@ -69,6 +98,7 @@ class User < ActiveRecord::Base
       super
     end
   end
+
   private
   def assign_user_role
     self.add_role "user"
