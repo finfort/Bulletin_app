@@ -18,18 +18,13 @@ To run application
     rake spec
 
 ##Roles
+| Role        | Login           | Password  |
+| ------------- |:-------------:| -----:|
+| Admin     | test| test |
+| Moderator      | moderator      |   test |
+| User | user      |    test |
 
-Admin role:
-login test
-password test
-***
-Moderator role:
-login moderator
-password test
-***
-User role:
-login user
-password test
+
 
 ##[Demo]
 
